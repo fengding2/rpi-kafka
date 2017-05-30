@@ -1,11 +1,12 @@
-FROM anapsix/alpine-java
+FROM sumglobal/rpi-openjdk:8-alpine
 
 ARG kafka_version=0.10.2.1
 ARG scala_version=2.12
 
-MAINTAINER wurstmeister
+MAINTAINER Charles Walker
 
 RUN apk add --update unzip wget curl docker jq coreutils
+RUN mkdir /opt
 
 ENV KAFKA_VERSION=$kafka_version SCALA_VERSION=$scala_version
 ADD download-kafka.sh /tmp/download-kafka.sh
