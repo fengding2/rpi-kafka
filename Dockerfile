@@ -1,4 +1,6 @@
-FROM sumglobal/rpi-openjdk:8-alpine
+FROM sumglobal/rpi-openjdk:8-jre-alpine
+
+RUN [ "cross-build-start" ]
 
 ARG kafka_version=0.10.2.1
 ARG scala_version=2.12
@@ -25,3 +27,6 @@ RUN chmod a+x /usr/bin/start-kafka.sh && \
     chmod a+x /usr/bin/create-topics.sh
 # Use "exec" form so that it runs as PID 1 (useful for graceful shutdown)
 CMD ["start-kafka.sh"]
+
+RUN [ "cross-build-end" ]  
+
