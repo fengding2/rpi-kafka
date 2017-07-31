@@ -1,11 +1,11 @@
 version: '2'
 services:
   zookeeper:
-    image: sumglobal/rpi-zookeeper
+    image: wurstmeister/zookeeper
     ports:
       - "2181:2181"
   kafka:
-    image: sumglobal/rpi-kafka
+    build: .
     ports:
       - "9092:9092"
     environment:
