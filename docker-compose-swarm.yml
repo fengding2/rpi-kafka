@@ -1,11 +1,11 @@
 version: '3.2'
 services:
   zookeeper:
-    image: wurstmeister/zookeeper
+    image: sumglobal/rpi-zookeeper
     ports:
       - "2181:2181"
   kafka:
-    image: ${REPO}kafka-docker:latest
+    image: sumglobal/rpi-kafka
     ports:
       - target: 9094
         published: 9094
