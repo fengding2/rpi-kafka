@@ -1,21 +1,23 @@
-[![Docker Pulls](https://img.shields.io/docker/pulls/wurstmeister/kafka.svg)](https://hub.docker.com/r/wurstmeister/kafka/)
-[![Docker Stars](https://img.shields.io/docker/stars/wurstmeister/kafka.svg)](https://hub.docker.com/r/wurstmeister/kafka/)
-[![](https://badge.imagelayers.io/wurstmeister/kafka:latest.svg)](https://imagelayers.io/?images=wurstmeister/kafka:latest)
 
-kafka-docker
+rpi kafka-docker
 ============
 
-Dockerfile for [Apache Kafka](http://kafka.apache.org/)
+ARM 32 bit Dockerfile for [Apache Kafka](http://kafka.apache.org/)
 
-The image is available directly from [Docker Hub](https://hub.docker.com/r/wurstmeister/kafka/)
+Uses the Azul embedded Open JDK
 
-## Pre-Requisites
+The image is available directly from [Docker Hub](https://hub.docker.com/r/sumglobal/rpi-kafka/)
 
-- install docker-compose [https://docs.docker.com/compose/install/](https://docs.docker.com/compose/install/)
-- modify the ```KAFKA_ADVERTISED_HOST_NAME``` in ```docker-compose.yml``` to match your docker host IP (Note: Do not use localhost or 127.0.0.1 as the host ip if you want to run multiple brokers.)
-- if you want to customize any Kafka parameters, simply add them as environment variables in ```docker-compose.yml```, e.g. in order to increase the ```message.max.bytes``` parameter set the environment to ```KAFKA_MESSAGE_MAX_BYTES: 2000000```. To turn off automatic topic creation set ```KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'false'```
+## Usage with Kubernetes
 
-## Usage
+- Assumes there is a running Zookeeper in the cluster with service name "zookeeper" listening on port 2181. You can find the one we are using here: [rpi-zookeeper](https://hub.docker.com/r/sumglobal/rpi-zookeeper) 
+
+- Create a Replication Controller
+
+- ```TODO: finish instructions```
+
+
+## Usage with Docker compose
 
 Start a cluster:
 
@@ -69,12 +71,6 @@ When using commands, make sure you review the "Variable Substitution" section in
 
 If ```KAFKA_ADVERTISED_HOST_NAME``` is specified, it takes precedence over ```HOSTNAME_COMMAND```
 
-For AWS deployment, you can use the Metadata service to get the container host's IP:
-```
-HOSTNAME_COMMAND=wget -t3 -T2 -qO-  http://169.254.169.254/latest/meta-data/local-ipv4
-```
-Reference: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
-
 ## JMX
 
 For monitoring purposes you may wish to configure JMX. Additional to the standard JMX parameters, problems could arise from the underlying RMI protocol used to connect
@@ -89,6 +85,3 @@ For example, to connect to a kafka running locally (assumes exposing port 1099)
 
 Jconsole can now connect at ```jconsole 192.168.99.100:1099```
 
-## Tutorial
-
-[http://wurstmeister.github.io/kafka-docker/](http://wurstmeister.github.io/kafka-docker/)

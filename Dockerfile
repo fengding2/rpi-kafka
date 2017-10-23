@@ -1,14 +1,14 @@
-FROM sumglobal/rpi-openjdk:8-jre-alpine
+FROM sumglobal/rpi-openjdk:8-jdk-azul
 
 RUN [ "cross-build-start" ]
 
-ARG kafka_version=0.10.2.1
+ARG kafka_version=0.11.0.1
 ARG scala_version=2.12
 
-MAINTAINER Charles Walker
+MAINTAINER Charles Walker <cwalker@sumglobal.com>
 
-RUN apk add --update unzip wget curl docker jq coreutils
-RUN mkdir /opt
+RUN apt-get update \
+    && apt-get install unzip wget curl jq coreutils
 
 ENV KAFKA_VERSION=$kafka_version SCALA_VERSION=$scala_version
 ADD download-kafka.sh /tmp/download-kafka.sh
