@@ -16,14 +16,14 @@ RUN chmod a+x /tmp/download-kafka.sh && sync && /tmp/download-kafka.sh && tar xf
 
 VOLUME ["/kafka"]
 
-ENV HOSTNAME_COMMAND "docker info | grep ^.*'Node Address:'| cut -d' ' -f 4"
+#ENV HOSTNAME_COMMAND "docker info | grep ^.*'Node Address:'| cut -d' ' -f 4"
 ENV KAFKA_HOME /opt/kafka
 ENV PATH ${PATH}:${KAFKA_HOME}/bin
 ENV KAFKA_ZOOKEEPER_CONNECT zookeeper:2181
 #ENV KAFKA_LISTENER_SECURITY_PROTOCOL_MAP INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT,BROKER:PLAINTEXT
 #ENV KAFKA_ADVERTISED_PROTOCOL_NAME OUTSIDE
 #ENV KAFKA_PROTOCOL_NAME INSIDE
-ENV KAFKA_ADVERTISED_PORT 9094
+#ENV KAFKA_ADVERTISED_PORT 9094
 ENV KAFKA_PORT 9092
 ADD start-kafka.sh /usr/bin/start-kafka.sh
 ADD broker-list.sh /usr/bin/broker-list.sh
@@ -33,7 +33,7 @@ RUN chmod a+x /usr/bin/start-kafka.sh && \
     chmod a+x /usr/bin/broker-list.sh && \
     chmod a+x /usr/bin/create-topics.sh
 # Use "exec" form so that it runs as PID 1 (useful for graceful shutdown)
-CMD ["start-kafka.sh"]
+CMD ["start.sh"]
 
 RUN [ "cross-build-end" ]  
 
