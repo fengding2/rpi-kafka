@@ -8,7 +8,7 @@ ARG scala_version=2.12
 MAINTAINER Charles Walker <cwalker@sumglobal.com>
 
 RUN apt-get update \
-    && apt-get install unzip wget curl jq coreutils
+    && apt-get install unzip wget curl jq coreutils net-tools
 
 ENV KAFKA_VERSION=$kafka_version SCALA_VERSION=$scala_version
 ADD download-kafka.sh /tmp/download-kafka.sh
