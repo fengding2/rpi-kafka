@@ -4,7 +4,7 @@ if [[ -z "$KAFKA_PORT" ]]; then
     export KAFKA_PORT=9092
 fi
 
-create-topics.sh &
+#create-topics.sh &
 
 if [[ -z "$KAFKA_ADVERTISED_PORT" && \
   -z "$KAFKA_LISTENERS" && \
