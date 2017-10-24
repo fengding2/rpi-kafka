@@ -8,7 +8,7 @@ ARG scala_version=2.12
 MAINTAINER Charles Walker <cwalker@sumglobal.com>
 
 RUN apt-get update \
-    && apt-get install bash unzip wget curl jq coreutils net-tools
+    && apt-get install bash docker unzip wget curl jq coreutils net-tools
 
 ENV KAFKA_VERSION=$kafka_version SCALA_VERSION=$scala_version
 ADD download-kafka.sh /tmp/download-kafka.sh
@@ -20,9 +20,9 @@ ENV HOSTNAME_COMMAND "docker info | grep ^.*'Node Address:'| cut -d' ' -f 4"
 ENV KAFKA_HOME /opt/kafka
 ENV PATH ${PATH}:${KAFKA_HOME}/bin
 ENV KAFKA_ZOOKEEPER_CONNECT zookeeper:2181
-ENV KAFKA_LISTENER_SECURITY_PROTOCOL_MAP INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
-ENV KAFKA_ADVERTISED_PROTOCOL_NAME OUTSIDE
-ENV KAFKA_PROTOCOL_NAME INSIDE
+#ENV KAFKA_LISTENER_SECURITY_PROTOCOL_MAP INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT,BROKER:PLAINTEXT
+#ENV KAFKA_ADVERTISED_PROTOCOL_NAME OUTSIDE
+#ENV KAFKA_PROTOCOL_NAME INSIDE
 ENV KAFKA_ADVERTISED_PORT 9094
 ENV KAFKA_PORT 9092
 ADD start-kafka.sh /usr/bin/start-kafka.sh
