@@ -25,7 +25,7 @@ ENV KAFKA_ZOOKEEPER_CONNECT zookeeper:2181
 #ENV KAFKA_PROTOCOL_NAME INSIDE
 #ENV KAFKA_ADVERTISED_PORT 9094
 ENV KAFKA_PORT 9092
-ADD start-kafka.sh /usr/bin/start-kafka.sh
+ADD start.sh /usr/bin/start.sh
 ADD broker-list.sh /usr/bin/broker-list.sh
 ADD create-topics.sh /usr/bin/create-topics.sh
 # The scripts need to have executable permission
