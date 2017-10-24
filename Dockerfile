@@ -17,7 +17,7 @@ RUN chmod a+x /tmp/download-kafka.sh && sync && /tmp/download-kafka.sh && tar xf
 VOLUME ["/kafka"]
 
 #ENV HOSTNAME_COMMAND "docker info | grep ^.*'Node Address:'| cut -d' ' -f 4"
-ENV KAFKA_HOME /opt/kafka
+ENV KAFKA_HOME /opt/kafka_${SCALA_VERSION}-${KAFKA_VERSION}
 ENV PATH ${PATH}:${KAFKA_HOME}/bin
 ENV KAFKA_ZOOKEEPER_CONNECT zookeeper:2181
 #ENV KAFKA_LISTENER_SECURITY_PROTOCOL_MAP INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT,BROKER:PLAINTEXT
@@ -25,7 +25,7 @@ ENV KAFKA_ZOOKEEPER_CONNECT zookeeper:2181
 #ENV KAFKA_PROTOCOL_NAME INSIDE
 #ENV KAFKA_ADVERTISED_PORT 9094
 ENV KAFKA_PORT 9092
-ADD config /opt/kafka/config
+ADD config/server.properties.template ${KAFKA_HOME}/config/server.properties.template
 ADD start.sh /usr/bin/start.sh
 ADD broker-list.sh /usr/bin/broker-list.sh
 ADD create-topics.sh /usr/bin/create-topics.sh
