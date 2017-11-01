@@ -17,6 +17,8 @@ RUN chmod a+x /tmp/download-kafka.sh && sync && /tmp/download-kafka.sh && tar xf
 VOLUME ["/kafka"]
 
 ENV KAFKA_HOME /opt/kafka_${SCALA_VERSION}-${KAFKA_VERSION}
+# default to auto assign
+ENV KAFKA_BROKER_ID=-1
 ENV PATH ${PATH}:${KAFKA_HOME}/bin
 ENV ZOOKEEPER_IP zookeeper
 ENV KAFKA_ADVERTISED_PORT 9094
