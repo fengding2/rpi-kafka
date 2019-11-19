@@ -1,8 +1,8 @@
 FROM sumglobal/rpi-openjdk:8-jdk-azul
 
-RUN [ "cross-build-start" ]
+# RUN [ "cross-build-start" ]
 
-ARG kafka_version=0.11.0.1
+ARG kafka_version=2.3.0
 ARG scala_version=2.12
 
 LABEL maintainer="Charles Walker <cwalker@sumglobal.com>, Chip Dickson <cdickson@sumglobal.com>"
@@ -24,11 +24,12 @@ ENV ZOOKEEPER_IP zookeeper
 ENV KAFKA_ADVERTISED_PORT 9094
 ENV KAFKA_PORT 9092
 ADD config/server.properties.template ${KAFKA_HOME}/config/server.properties.template
-ADD start.sh /usr/bin/start.sh
+# ADD start.sh /usr/bin/start.sh
+ADD pi_start.sh /usr/bin/pi_start.sh
 ADD broker-list.sh /usr/bin/broker-list.sh
 ADD create-topics.sh /usr/bin/create-topics.sh
 # The scripts need to have executable permission
-RUN chmod a+x /usr/bin/start.sh && \
+RUN chmod a+x /usr/bin/pi_start.sh && \
     chmod a+x /usr/bin/broker-list.sh && \
     chmod a+x /usr/bin/create-topics.sh
 
@@ -37,7 +38,7 @@ ENV KAFKA_HEAP_OPTS -Xmx256M\ -Xms256M
 # Zulu embedded doesn't support the G1 compiler and other options set by default - These are a bit more reasonable
 ENV KAFKA_JVM_PERFORMANCE_OPTS -server\ -XX:+DisableExplicitGC\ -Djava.awt.headless=true
 # Use "exec" form so that it runs as PID 1 (useful for graceful shutdown)
-CMD ["start.sh"]
+CMD ["pi_start.sh"]
 
-RUN [ "cross-build-end" ]  
+# RUN [ "cross-build-end" ]  
 

@@ -28,6 +28,10 @@ default.replication.factor={{KAFKA_DEFAULT_REPLICATION_FACTOR}}
 # from InetAddress.getLocalHost().  If there are multiple interfaces getLocalHost
 # may not be what you want.
 advertised.host.name={{KAFKA_ADVERTISED_HOST_NAME}}
+advertised.listeners={{KAFKA_ADVERTISED_LISTENERS}}
+listeners={{KAFKA_LISTENERS}}
+listener.security.protocol.map={{KAFKA_LISTENER_SECURITY_PROTOCOL_MAP}}
+inter.broker.listener.name={{KAFKA_INTER_BROKER_LISTENER_NAME}}
 
 # Enable topic deletion
 delete.topic.enable={{KAFKA_DELETE_TOPIC_ENABLE}}
@@ -75,4 +79,6 @@ group.max.session.timeout.ms={{KAFKA_GROUP_MAX_SESSION_TIMEOUT_MS}}
 inter.broker.protocol.version={{KAFKA_INTER_BROKER_PROTOCOL_VERSION}}
 log.message.format.version={{KAFKA_LOG_MESSAGE_FORMAT_VERSION}}
 
+
+offsets.topic.replication.factor={{OFFSETS_TOPIC_REPLICATION_FACTOR}}
 # vim:set filetype=jproperties
